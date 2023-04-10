@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
             direction = cam.transform.TransformVector(inputX, 0, forwardSpeed);
             //direction = cam.transform.TransformVector(forwardSpeed, 0, inputX);
             direction.y = 0;
-            //direction.x = Mathf.Clamp(direction.x, xLimit.x, xLimit.y);     //x limitasyonu, iþe yaramýyor
+            direction.x = Mathf.Clamp(direction.x, xLimit.x, xLimit.y);     //x limitasyonu, iþe yaramýyor
 
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }

@@ -6,6 +6,7 @@ public class TriggerController : MonoBehaviour
 {
     public GameObject coffee;
     public GameObject lid;
+    public GameObject sleeve;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,7 +28,7 @@ public class TriggerController : MonoBehaviour
                 CupManager.Instance.DestroyMe(gameObject);
                 gameObject.GetComponent<NodeMovement>().enabled = false;
 
-                gameObject.transform.position = other.transform.GetChild(3).position;
+                gameObject.transform.position = other.transform.GetChild(2).position;
                 gameObject.transform.SetParent(other.transform);
 
                 Animator anim = other.gameObject.GetComponent<Animator>();
@@ -41,6 +42,9 @@ public class TriggerController : MonoBehaviour
                 //    Destroy(other.gameObject);
                 //}
 
+                break;
+            case "Sleeve":
+                sleeve.SetActive(true);
                 break;
         }
     }
