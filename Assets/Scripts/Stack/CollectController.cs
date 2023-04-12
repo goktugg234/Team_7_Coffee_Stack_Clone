@@ -1,34 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CollectController : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public List<GameObject> CupList = new List<GameObject>();
+    public float waveDelay = 0.25f;
+    public static CollectController instance;
+    void Awake()
     {
-        if (other.gameObject.CompareTag("Collectable"))
-        {
-            other.gameObject.transform.position = transform.position + transform.right;
-            other.gameObject.AddComponent<CollectController>();
-            other.gameObject.GetComponent<Collider>().isTrigger = false;
-
-            other.gameObject.AddComponent<NodeMovement>();
-
-            
-
-            //other.gameObject.GetComponent<NodeMovement>().connectedNode = transform; 
-            other.gameObject.GetComponent<NodeMovement>().connectedNode = CupManager.Instance.cups[CupManager.Instance.cups.Count - 1].transform;
-
-            CupManager.Instance.cups.Add(other.gameObject);
-
-
-
-
-
-            other.gameObject.tag = "Collected";
-            //other.transform.SetParent(transform.root);
-            //Destroy(gameObject.GetComponent<CollectController>());
-
+        DOTween.SetTweensCapacity(10000,2000);
+        if(instance == null){
+            instance = this;
+        }
+    }
+    public void StackCups(GameObject other, int index){
+        CupList.Add(other.gameObject);
+        StartCoroutine(MakeWave());
+    }
+    private IEnumerator MakeWave(){
+        for(int i = CupList.Count - 1; i > 0; i--){
+            int index = i;
+            Vector3 scaleSize = new Vector3(1,1,1);
+            scaleSize *= 1.5f;
+            CupList[index].transform.DOScale(scaleSize, 0.1f).OnComplete(() => 
+            CupList[index].transform.DOScale(new Vector3(1,1,1), 0.1f));
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }

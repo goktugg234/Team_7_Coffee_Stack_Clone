@@ -3,7 +3,10 @@ guid: 52bc59267ca06d74a9aa142686d01852
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - coffee: {fileID: 919132149155446097, guid: 50d22ab67a2247c4cabdea639616b595, type: 3}
+  - lid: {fileID: 919132149155446097, guid: 71f2d5cbe6adf0848af6b550f18d2abd, type: 3}
+  - sleeve: {fileID: 919132149155446097, guid: 6888fcfc50a38634c90900ca7fa5dee3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

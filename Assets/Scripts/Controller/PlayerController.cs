@@ -7,17 +7,16 @@ using UnityEngine.Windows;
 public class PlayerController : MonoBehaviour
 {
     public Joystick variableJoystick;
-    public int moveSpeed;
+    public float moveSpeed;
     float forwardSpeed = 0.8f;
 
 
-    Vector3 direction;
-    //Rigidbody rb;
+    public Vector3 direction;
     Camera cam;
     public Vector2 xLimit;
 
     //[HideInInspector]
-    public bool isGoing = false;
+    public bool isGoing = false, isFinished = false;
 
     void Start()
     {
@@ -40,9 +39,13 @@ public class PlayerController : MonoBehaviour
             direction = cam.transform.TransformVector(inputX, 0, forwardSpeed);
             //direction = cam.transform.TransformVector(forwardSpeed, 0, inputX);
             direction.y = 0;
-            direction.x = Mathf.Clamp(direction.x, xLimit.x, xLimit.y);     //x limitasyonu, iþe yaramýyor
+            direction.x = Mathf.Clamp(direction.x, xLimit.x, xLimit.y);     //x limitasyonu, iï¿½e yaramï¿½yor
 
             transform.Translate(direction * moveSpeed * Time.deltaTime);
+        }
+        if(isFinished){
+            transform.position= new Vector3(0, transform.position.y, transform.position.z);
+            
         }
     }
 
@@ -57,15 +60,15 @@ public class PlayerController : MonoBehaviour
 
     //void MovementFixedUpdate()
     //{
-    //    //TRANSFORM ÝLE HAREKET---UPDATE ÝÇERSÝNDE ÇALIÞTIRILABÝLÝR
+    //    //TRANSFORM ï¿½LE HAREKET---UPDATE ï¿½ï¿½ERSï¿½NDE ï¿½ALIï¿½TIRILABï¿½Lï¿½R
     //    //transform.rotation = Quaternion.LookRotation(direction);
-    //    //transform.Translate(direction.x, 0, moveSpeed );     //karakterin önü yönünde ilerletilecek
+    //    //transform.Translate(direction.x, 0, moveSpeed );     //karakterin ï¿½nï¿½ yï¿½nï¿½nde ilerletilecek
 
-    //    //HER YÖNE HAREKET
+    //    //HER Yï¿½NE HAREKET
     //    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.15f);
-    //    //rb.velocity = transform.forward * moveSpeed;        //bazen triggerlarýn içinden geçiyor. rb ile hareket ettirilirse geçmeyebilir. rb ile harekette time.deltatime ile çarpýlmaz
+    //    //rb.velocity = transform.forward * moveSpeed;        //bazen triggerlarï¿½n iï¿½inden geï¿½iyor. rb ile hareket ettirilirse geï¿½meyebilir. rb ile harekette time.deltatime ile ï¿½arpï¿½lmaz
 
-    //    //RB ÝLE HAREKET
+    //    //RB ï¿½LE HAREKET
     //    rb.velocity = direction * moveSpeed;
     //}
 }

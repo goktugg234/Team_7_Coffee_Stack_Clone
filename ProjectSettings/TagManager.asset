@@ -11,6 +11,10 @@ TagManager:
   - Hand
   - Obstacle
   - Sleeve
+  - LCoffee
+  - SleeveC
+  - Throw
+  - Temp
   layers:
   - Default
   - TransparentFX

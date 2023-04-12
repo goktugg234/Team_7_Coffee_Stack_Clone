@@ -1,7 +1,8 @@
-using DG.Tweening;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
+
 public class CamFollow : MonoBehaviour
 {
 
@@ -10,7 +11,7 @@ public class CamFollow : MonoBehaviour
     Vector3 offset;
     public float shakeStrength = 2f;
 
-    public bool isShake;
+    public bool isFinished = false;
 
     public Vector2 xLimit;
     public bool limitation = true;
@@ -40,16 +41,13 @@ public class CamFollow : MonoBehaviour
                         target.position.z + offset.z
                         );
             }
+            if(isFinished){
+                transform.position = new Vector3(
+                        Mathf.Clamp((target.position.x + offset.x), xLimit.x, xLimit.y),
+                        target.position.y + offset.y - 1f,
+                        target.position.z + offset.z - 1f
+                        );
+            }
         }
     }
-
-    public void Shake()
-    {
-        if (isShake)
-        {
-            transform.GetChild(0).DOShakePosition(1f, shakeStrength, fadeOut: true);
-            return;
-        }
-    }
-
 }

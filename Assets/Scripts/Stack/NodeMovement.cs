@@ -4,25 +4,14 @@ using UnityEngine;
 
 public class NodeMovement : MonoBehaviour
 {
-
     public Transform connectedNode;
-
-    float distanceBetweenNodes = 1;
-
+    float distanceBetweenNodes = 1f;
 
     void Update()
     {
         transform.position = new Vector3(
         Mathf.Lerp(transform.position.x, connectedNode.position.x, Time.deltaTime * 20),
             connectedNode.position.y,
-            connectedNode.position.z + distanceBetweenNodes
-            );
-
-
-        //transform.position = new Vector3(
-        //    connectedNode.position.x + 1,
-        //    connectedNode.position.y,
-        //    Mathf.Lerp(transform.position.z, connectedNode.position.z, Time.deltaTime * 20)
-        //    );
+            connectedNode.position.z + distanceBetweenNodes);
     }
 }

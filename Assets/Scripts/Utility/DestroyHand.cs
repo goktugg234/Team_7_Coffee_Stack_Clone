@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class DestroyHand : StateMachineBehaviour
 {
+    TriggerController triggerController;
+    private void Awake() {
+        triggerController = FindObjectOfType<TriggerController>();
+    }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Destroy(animator.transform.gameObject);
+        triggerController.handCollected = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
